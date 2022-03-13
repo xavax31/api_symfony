@@ -31,11 +31,15 @@ class MainController extends AbstractController
 
         $result = $productRepository->findAll();
         
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/MainController.php',
-            'result' => $result[0]->getName(),
-            'user' => $user ? $user->getUserIdentifier() : null
+        // return $this->json([
+        //     'message' => 'Welcome to your new controller!',
+        //     'path' => 'src/Controller/MainController.php',
+        //     'result' => $result[0]->getName(),
+        //     'user' => $user ? $user->getUserIdentifier() : null
+        // ]);
+
+        return $this->render('home/index.html.twig', [
+            'username' => $user ? $user->getUserIdentifier() : null
         ]);
     }
 }

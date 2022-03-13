@@ -1,0 +1,16 @@
+{# templates/login/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+
+{% if username %}
+Hi {{username}}
+    <a href="logout">Logout</a>
+{% else %}
+    <a href="login">Login</a>
+
+{% endif %}
+
+{% endblock %}
