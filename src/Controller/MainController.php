@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Entity\Thing;
+use App\Entity\User;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,7 +17,8 @@ class MainController extends AbstractController
     #[Route('/', name: 'home')]
     public function index(ProductRepository $productRepository, EntityManagerInterface $em): Response
     {
-
+        /** @var User $user */
+        $user = $this->getUser();
         $product = new Product();
         $product->setName("yop");
         $em->persist($product);
@@ -32,7 +34,8 @@ class MainController extends AbstractController
         return $this->json([
             'message' => 'Welcome to your new controller!',
             'path' => 'src/Controller/MainController.php',
-            'result' => $result[0]->getName()
+            'result' => $result[0]->getName(),
+            'user' => $user->getUserIdentifier()
         ]);
     }
 }
