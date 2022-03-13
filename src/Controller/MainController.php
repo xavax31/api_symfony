@@ -35,7 +35,7 @@ class MainController extends AbstractController
             'message' => 'Welcome to your new controller!',
             'path' => 'src/Controller/MainController.php',
             'result' => $result[0]->getName(),
-            'user' => $user->getUserIdentifier()
+            'user' => $user ? $user->getUserIdentifier() : null
         ]);
     }
 }
