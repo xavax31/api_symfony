@@ -42,4 +42,26 @@ class MainController extends AbstractController
             'username' => $user ? $user->getUserIdentifier() : null
         ]);
     }
+
+    #[Route('/admintest', name: 'admintest')]
+    public function admintest(): Response
+    {
+        // $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+
+        return $this->json(["yop"=>"cool"]);
+    }
+
+    #[Route('/apitest', name: 'apitest')]
+    public function apitest(): Response
+    {
+        // $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        // $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+
+        $user = $this->getUser();
+        return $this->json($this->getUser(), 200, [], [
+            'groups' => ['user:read']
+        ]);
+        // return $this->json(["yop"=>"i'm api", "user"=>$user?$user->getUserIdentifier() : "none"]);
+    }
 }

@@ -5,8 +5,8 @@
 
 {% block body %}
 
-{% if username %}
-Hi {{username}}
+{% if  app.user %}
+Hi {{ app.user.userIdentifier }}
     <a href="logout">Logout</a>
 {% else %}
     <a href="login">Login</a>
