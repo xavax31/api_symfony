@@ -16,6 +16,25 @@ services:
       - MARIADB_PASSWORD=${DATABASE_PASSWORD}
       - MARIADB_ROOT_PASSWORD=${DATABASE_ROOT_PASSWORD}
       - MARIADB_DATABASE=${DATABASE_NAME}
+        
+  webserver-app:
+    depends_on:
+      - mariadb
+    container_name: webserver-app
+    build: 
+      context: .
+      dockerfile: .local/Dockerfile
+    image: webserver-app
+    restart: unless-stopped
+    networks:
+      - webserver_stack
+    ports:
+      - 8989:80
+    volumes:
+      - ./docker/php/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+      - ./:/var/www/html
+      - /var/www/html/vendor
+      - ./.local/vhost.conf:/etc/apache2/sites-enabled/000-default.conf
   phpmyadmin:
     depends_on:
       - mariadb
