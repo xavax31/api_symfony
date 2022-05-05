@@ -64,4 +64,22 @@ class MainController extends AbstractController
         ]);
         // return $this->json(["yop"=>"i'm api", "user"=>$user?$user->getUserIdentifier() : "none"]);
     }
+
+    #[Route('/api/test', name: 'api_test')]
+    public function api_test(): Response
+    {
+        // $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        // $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+
+        $user = $this->getUser();
+        if ($user) {
+            return $this->json($user, 200, [], [
+                'groups' => ['user:read']
+            ]);
+        }
+        else {
+            return $this->json(["message"=>"You must be connected to access"], 401);
+        }
+
+    }
 }
