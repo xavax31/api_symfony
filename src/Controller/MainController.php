@@ -80,6 +80,21 @@ class MainController extends AbstractController
         else {
             return $this->json(["message"=>"You must be connected to access"], 401);
         }
+    }
+
+    #[Route('/test', name: 'test')]
+    public function test(): Response
+    {
+        return $this->json(["message"=>"hello"], 200);
+        // $user = $this->getUser();
+        // if ($user) {
+        //     return $this->json($user, 200, [], [
+        //         'groups' => ['user:read']
+        //     ]);
+        // }
+        // else {
+        //     return $this->json(["message"=>"You must be connected to access"], 401);
+        // }
 
     }
 }

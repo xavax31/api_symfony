@@ -39,9 +39,9 @@ security:
                 login_path: login
                 check_path: login
 
-            # json_login:
-            #     # api_login is a route we will create below
-            #     check_path: api_login
+            json_login:
+                # api_login is a route we will create below
+                check_path: jsonapi_login
 
             logout:
                 path: app_logout
